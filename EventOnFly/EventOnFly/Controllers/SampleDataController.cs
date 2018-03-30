@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventOnFly.Data;
+using EventOnFly.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventOnFly.Controllers
@@ -9,36 +11,27 @@ namespace EventOnFly.Controllers
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private static string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly EofDbContext context;
 
-        [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        public SampleDataController(EofDbContext context)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
+            this.context = context;
         }
 
-        public class WeatherForecast
+        [HttpPost("[action]")]
+        public IActionResult PostTest([FromBody]TestModel model)
         {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
+            model = new TestModel { DateTimeColumn = model.DateTimeColumn, StringColumn = model.StringColumn };
+            context.TestModels.Add(model);
+            context.SaveChanges();
+            return Ok();
+        }
 
-            public int TemperatureF
-            {
-                get
-                {
-                    return 32 + (int)(TemperatureC / 0.5556);
-                }
-            }
+        [HttpGet("[action]")]
+        public IEnumerable<TestModel> GetAllTestModels()
+        {
+            var models = context.TestModels.ToList();
+            return models;
         }
     }
 }
