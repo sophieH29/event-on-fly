@@ -30,7 +30,7 @@ namespace EventOnFly
                     options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
             else
                 services.AddDbContext<EofDbContext>(options =>
-                    options.UseSqlite("Data Source=MvcMovie.db"));
+                    options.UseSqlite("Data Source=EofDb.db"));
 
             // Automatically perform database migration
             services.BuildServiceProvider().GetService<EofDbContext>().Database.Migrate();
