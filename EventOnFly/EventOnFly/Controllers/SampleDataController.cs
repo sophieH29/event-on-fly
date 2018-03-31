@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using EventOnFly.Data;
 using EventOnFly.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -19,18 +17,17 @@ namespace EventOnFly.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult PostTest([FromBody]TestModel model)
+        public IActionResult PostTest([FromBody]Venue venue)
         {
-            model = new TestModel { DateTimeColumn = model.DateTimeColumn, StringColumn = model.StringColumn };
-            context.TestModels.Add(model);
+            context.Venues.Add(venue);
             context.SaveChanges();
             return Ok();
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<TestModel> GetAllTestModels()
+        public IEnumerable<Venue> GetAllTestModels()
         {
-            var models = context.TestModels.ToList();
+            var models = context.Venues.ToList();
             return models;
         }
     }

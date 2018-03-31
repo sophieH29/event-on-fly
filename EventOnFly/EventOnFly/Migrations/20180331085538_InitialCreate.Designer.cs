@@ -11,27 +11,26 @@ using System;
 namespace EventOnFly.Migrations
 {
     [DbContext(typeof(EofDbContext))]
-    [Migration("20180330124618_InitialCreate")]
+    [Migration("20180331085538_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EventOnFly.Models.TestModel", b =>
+            modelBuilder.Entity("EventOnFly.Models.Venue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("DateTimeColumn");
-
-                    b.Property<string>("StringColumn");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TestModels");
+                    b.ToTable("Venues");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,20 +17,19 @@ namespace EventOnFly.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EventOnFly.Models.TestModel", b =>
+            modelBuilder.Entity("EventOnFly.Models.Venue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("DateTimeColumn");
-
-                    b.Property<string>("StringColumn");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TestModels");
+                    b.ToTable("Venues");
                 });
 #pragma warning restore 612, 618
         }

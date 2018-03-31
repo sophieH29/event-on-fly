@@ -6,17 +6,16 @@ import { Http } from '@angular/http';
     templateUrl: './fetchdata.component.html'
 })
 export class FetchDataComponent {
-    public models: ITestModel[];
+    public models: IVenue[];
 
-    public currentModel: ITestModel = {
-        id: 1,
-        dateTimeColumn: new Date(),
-        stringColumn: "test"
+    public currentModel: IVenue = {
+        id: 0,
+        name: "Venue1"
     }
 
     constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {
         http.get(baseUrl + 'api/SampleData/GetAllTestModels').subscribe(result => {
-            this.models = result.json() as ITestModel[];
+            this.models = result.json() as IVenue[];
         }, error => console.error(error));
     }
 
@@ -26,8 +25,7 @@ export class FetchDataComponent {
     }
 }
 
-interface ITestModel {
+interface IVenue {
     id: number;
-    dateTimeColumn: Date;
-    stringColumn: string;
+    name: string;
 }

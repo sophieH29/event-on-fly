@@ -10,6 +10,6 @@ namespace EventOnFly.Data
         {
         }
 
-        public DbSet<TestModel> TestModels { get; set; }
+        public DbSet<Venue> Venues { get; set; }
     }
 }
