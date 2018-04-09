@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
