@@ -12,9 +12,10 @@ using System;
 namespace EventOnFly.Migrations
 {
     [DbContext(typeof(EofDbContext))]
-    partial class EofDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180412132428_AddServiceState")]
+    partial class AddServiceState
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
