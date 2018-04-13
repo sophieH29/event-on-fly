@@ -2,14 +2,13 @@
 import { Route } from "@angular/router";
 import { VendorRegistrationComponent } from "./registration/vendor-registration.component";
 
-const vendorsRoute: Route = {
+export const vendorsRoute: Route = {
     path: "vendor",
     children: [
         { path: "registration", component: VendorRegistrationComponent },
         { path: "userstats", redirectTo: "registration" }
     ]
 };
-export default vendorsRoute;
 
 @NgModule({
     declarations: [

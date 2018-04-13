@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventOnFly.Controllers
 {
+    [Route("api/[controller]")]
     public class RegistrationController : Controller
     {
         private readonly IRegistrationService registrationService;
@@ -15,6 +16,7 @@ namespace EventOnFly.Controllers
             this.registrationService = registrationService;
         }
 
+        [HttpPost("[action]")]
         public async Task<StartRegistrationResult> StartRegistration(StartRegistrationForm form)
         {
             return await registrationService.StartRegistration(form);
