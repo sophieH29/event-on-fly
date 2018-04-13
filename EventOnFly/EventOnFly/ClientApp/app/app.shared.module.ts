@@ -1,34 +1,32 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { HttpModule } from "@angular/http";
+import { RouterModule, Route } from "@angular/router";
 
-import { AppComponent } from './components/app/app.component';
-import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./home/home.component";
+import { VendorsModule } from "./vendors/vendors.module";
+import vendorsRoute from "./vendors/vendors.module";
+
+let appRoutes: Route[] = [
+    { path: "", redirectTo: "home", pathMatch: "full" },
+    { path: "home", component: HomeComponent },
+    vendorsRoute,
+    { path: "**", redirectTo: "home" }
+];
 
 @NgModule({
     declarations: [
         AppComponent,
-        NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
         HomeComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
-        RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
-            { path: '**', redirectTo: 'home' }
-        ])
+        RouterModule.forRoot(appRoutes),
+        VendorsModule
     ]
 })
 export class AppModuleShared {
