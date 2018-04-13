@@ -25,17 +25,10 @@ namespace EventOnFly
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            //if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-            //    services.AddDbContext<EofDbContext>(options =>
-            //        options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
-            //else
-            //    services.AddDbContext<EofDbContext>(options =>
-            //        options.UseSqlite("Data Source=EofDb.db"));
 
             services.AddDbContext<EofDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
 
-            // Automatically perform database migration
             services.BuildServiceProvider().GetService<EofDbContext>().Database.Migrate();
         }
 
