@@ -1,4 +1,6 @@
+using EventOnFly.BusinessLogic;
 using EventOnFly.Data;
+using EventOnFly.Data.RequestProcessors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -26,6 +28,10 @@ namespace EventOnFly
                     options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
 
             services.BuildServiceProvider().GetService<EofDbContext>().Database.Migrate();
+
+            services.AddTransient<IRegistrationService, RegistrationService>();
+            services.AddTransient<IProcedureExecutor, ProcedureExecutor>();
+            services.AddTransient<IDbMediator, DbMediator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

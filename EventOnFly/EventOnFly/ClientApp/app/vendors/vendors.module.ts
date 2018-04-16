@@ -1,6 +1,7 @@
 ﻿import { NgModule } from "@angular/core";
 import { Route } from "@angular/router";
 import { VendorRegistrationComponent } from "./registration/vendor-registration.component";
+import {RegistrationApiService} from "./registration/registration.api.service";
 
 export const vendorsRoute: Route = {
     path: "vendor",
@@ -16,6 +17,9 @@ export const vendorsRoute: Route = {
     ],
     exports: [
         VendorRegistrationComponent
+    ],
+    providers: [
+        RegistrationApiService
     ]
 })
 export class VendorsModule {

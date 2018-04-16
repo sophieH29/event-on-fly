@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\app\apiRelated\baseUrlHttpInterceptor.ts" />
     <None Remove="ClientApp\app\common\injectableVariables.ts" />
     <None Remove="ClientApp\app\home\home.component.ts" />
     <None Remove="ClientApp\app\vendors\registration\registration.api.service.ts" />
@@ -41,7 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\apiRelated\baseUrlHttpInterceptor.ts" />
     <TypeScriptCompile Include="ClientApp\app\common\injectableVariables.ts" />
     <TypeScriptCompile Include="ClientApp\app\home\home.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\vendors\registration\registration.api.service.ts" />
