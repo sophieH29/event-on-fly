@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using EventOnFly.BusinessLogic;
-using EventOnFly.Dtos;
 using EventOnFly.Enums;
+using EventOnFly.VendorSide.BusinessLogic;
+using EventOnFly.VendorSide.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventOnFly.Controllers

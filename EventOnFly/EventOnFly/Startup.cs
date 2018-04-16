@@ -1,6 +1,6 @@
-using EventOnFly.BusinessLogic;
 using EventOnFly.Data;
 using EventOnFly.Data.RequestProcessors;
+using EventOnFly.VendorSide.BusinessLogic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;

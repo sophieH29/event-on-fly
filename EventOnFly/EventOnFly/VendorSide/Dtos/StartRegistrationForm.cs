@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using EventOnFly.Enums;
 
-namespace EventOnFly.Dtos
+namespace EventOnFly.VendorSide.Dtos
 {
     public class StartRegistrationForm
     {

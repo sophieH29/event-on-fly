@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using EventOnFly.Data.RequestProcessors;
-using EventOnFly.Dtos;
 using EventOnFly.Enums;
+using EventOnFly.VendorSide.Dtos;
 
-namespace EventOnFly.BusinessLogic
+namespace EventOnFly.VendorSide.BusinessLogic
 {
     public interface IRegistrationService
     {
