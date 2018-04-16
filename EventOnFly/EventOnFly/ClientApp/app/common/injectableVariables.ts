@@ -1,3 +1,3 @@
-﻿//import { InjectionToken } from "@angular/core";
+﻿import { InjectionToken } from "@angular/core";
 
-//export declare const BASE_URL: InjectionToken<string>;
+export const BASE_URL: InjectionToken<string> = new InjectionToken<string>("BASE_URL");
