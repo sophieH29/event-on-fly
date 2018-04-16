@@ -14,7 +14,7 @@ namespace EventOnFly.Data.DbAccess
 
         public List<string> ColumnNames { get; }
 
-        public IEnumerable<List<object>> Values { get; }
+        public List<List<object>> Values { get; }
 
         public IEnumerable<T> MapToType<T>()
         {

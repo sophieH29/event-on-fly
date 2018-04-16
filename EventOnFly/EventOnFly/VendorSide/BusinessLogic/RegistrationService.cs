@@ -14,11 +14,16 @@ namespace EventOnFly.VendorSide.BusinessLogic
     {
         private readonly IProcedureExecutor procedureExecutor;
         private readonly ITransacrionManager transactionManager;
+        private readonly IDbMediator dbMediator;
 
-        public RegistrationService(IProcedureExecutor procedureExecutor, ITransacrionManager transactionManager)
+        public RegistrationService(
+            IProcedureExecutor procedureExecutor, 
+            ITransacrionManager transactionManager,
+            IDbMediator dbMediator)
         {
             this.procedureExecutor = procedureExecutor;
             this.transactionManager = transactionManager;
+            this.dbMediator = dbMediator;
         }
 
         public async Task<StartRegistrationResult> StartRegistration(StartRegistrationForm form)
@@ -26,9 +31,17 @@ namespace EventOnFly.VendorSide.BusinessLogic
             return await transactionManager.ExecuteWithinTransaction(async () =>
             {
                 var serviceExists =
-                    await procedureExecutor.ExecProcedureNonQuery<bool>(ProcedureName.CheckServiceUserExists, form.Username, form.Email);
+                    await procedureExecutor.ExecProcedureNonQuery<bool>(
+                        ProcedureName.CheckServiceUserExists, 
+                        new ProcedureParameter("username", form.Username), 
+                        new ProcedureParameter("email", form.Email));
                 if (serviceExists) return StartRegistrationResult.UserAlreadyExists;
-                await procedureExecutor.ExecuteProcedureNoResult(ProcedureName.CheckServiceUserExists, form.Username, form.Email);
+                await procedureExecutor.ExecuteProcedureNoResult(
+                    ProcedureName.CreateNewService,
+                    new ProcedureParameter("username", form.Username),
+                    new ProcedureParameter("email", form.Email),
+                    new ProcedureParameter("password", form.Password),
+                    new ProcedureParameter("attachedServiceTypes", form.AttachedServiceTypes));
                 return StartRegistrationResult.Success;
             });
         }

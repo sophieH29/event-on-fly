@@ -6,11 +6,11 @@ namespace EventOnFly.Data.DbAccess
 {
     public interface IProcedureExecutor
     {
-        Task<IEnumerable<T>> ExecProcedure<T>(ProcedureName procedureName, params object[] parameters) where T : new();
+        Task<IEnumerable<T>> ExecProcedure<T>(ProcedureName procedureName, params ProcedureParameter[] parameters) where T : new();
 
-        Task<T> ExecProcedureNonQuery<T>(ProcedureName procedureName, params object[] parameters) where T : struct;
+        Task<T> ExecProcedureNonQuery<T>(ProcedureName procedureName, params ProcedureParameter[] parameters) where T : struct;
 
-        Task ExecuteProcedureNoResult(ProcedureName procedureName, params object[] parameters);
+        Task ExecuteProcedureNoResult(ProcedureName procedureName, params ProcedureParameter[] parameters);
     }
 
     public class ProcedureExecutor : IProcedureExecutor
@@ -22,19 +22,19 @@ namespace EventOnFly.Data.DbAccess
             this.dbMediator = dbMediator;
         }
 
-        public async Task<IEnumerable<T>> ExecProcedure<T>(ProcedureName procedureName, params object[] parameters) where T : new()
+        public async Task<IEnumerable<T>> ExecProcedure<T>(ProcedureName procedureName, params ProcedureParameter[] parameters) where T : new()
         {
             var result = await dbMediator.ExecuteProcedure(procedureName, parameters);
             return result.MapToType<T>();
         }
 
-        public async Task<T> ExecProcedureNonQuery<T>(ProcedureName procedureName, params object[] parameters) where T : struct
+        public async Task<T> ExecProcedureNonQuery<T>(ProcedureName procedureName, params ProcedureParameter[] parameters) where T : struct
         {
             var result = await dbMediator.ExecuteProcedureNonQuery(procedureName, parameters);
             return (T)Convert.ChangeType(result, typeof(T));
         }
 
-        public async Task ExecuteProcedureNoResult(ProcedureName procedureName, params object[] parameters)
+        public async Task ExecuteProcedureNoResult(ProcedureName procedureName, params ProcedureParameter[] parameters)
         {
             await dbMediator.ExecuteProcedureNonQuery(procedureName, parameters);
         }

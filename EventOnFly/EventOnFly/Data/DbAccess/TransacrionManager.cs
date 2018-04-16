@@ -13,8 +13,6 @@ namespace EventOnFly.Data.DbAccess
 
     public class TransacrionManager: ITransacrionManager
     {
-        private static int TRANSACTION_TIMEOUT = 30 * 1000;
-
         public async void ExecuteWithinTransaction(Func<Task> action)
         {
             var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
