@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EventOnFly.Data.RequestProcessors
+namespace EventOnFly.Data.DbAccess
 {
     public class CommandResponse
     {

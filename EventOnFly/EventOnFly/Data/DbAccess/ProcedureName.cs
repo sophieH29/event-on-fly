@@ -1,4 +1,4 @@
-﻿namespace EventOnFly.Data.RequestProcessors
+﻿namespace EventOnFly.Data.DbAccess
 {
     public enum ProcedureName
     {

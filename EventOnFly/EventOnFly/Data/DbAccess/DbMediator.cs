@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-namespace EventOnFly.Data.RequestProcessors
+namespace EventOnFly.Data.DbAccess
 {
     public interface IDbMediator
     {

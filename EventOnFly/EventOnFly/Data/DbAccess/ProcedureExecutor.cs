@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EventOnFly.Data.RequestProcessors
+namespace EventOnFly.Data.DbAccess
 {
     public interface IProcedureExecutor
     {
