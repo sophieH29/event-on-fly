@@ -1,16 +1,16 @@
 ﻿import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Http } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class RegistrationApiService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: Http) {
     }
 
-    public startRegistration(): Observable<StartRegistrationResult> {
-        return this.http.post<StartRegistrationResult>("/api/registration/startRegistration", {});
-    } 
+    //public startRegistration(): Observable<StartRegistrationResult> {
+    //    return this.http.post("/api/registration/startRegistration", {});
+    //} 
     
 }
 
