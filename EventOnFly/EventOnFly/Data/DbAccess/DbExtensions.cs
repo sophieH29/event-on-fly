@@ -4,7 +4,7 @@
     {
         public static string GetStringName(this ProcedureName procedureName)
         {
-            return $"[dbo].[usp{procedureName}]";
+            return $"[dbo].[{procedureName}]";
         }
     }
 }
