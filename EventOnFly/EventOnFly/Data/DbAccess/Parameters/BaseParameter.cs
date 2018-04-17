@@ -1,8 +1,8 @@
-﻿namespace EventOnFly.Data.DbAccess
+﻿namespace EventOnFly.Data.DbAccess.Parameters
 {
-    public class ProcedureParameter
+    public abstract class BaseParameter
     {
-        public ProcedureParameter(string parameterName, object obj)
+        protected BaseParameter(string parameterName, object obj)
         {
             ParameterName = $"{GetPrefix(parameterName)}{parameterName}";
             Object = obj;
@@ -12,7 +12,7 @@
 
         public object Object { get; }
 
-        private string GetPrefix(string inputName)
+        private static string GetPrefix(string inputName)
         {
             return inputName[0] == '@' ? "" : "@";
         }

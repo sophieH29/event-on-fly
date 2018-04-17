@@ -19,8 +19,7 @@ namespace EventOnFly.Controllers
         [HttpPost("[action]")]
         public async Task<StartRegistrationResult> StartRegistration(StartRegistrationForm form)
         {
-            return StartRegistrationResult.Success;
-            //return await registrationService.StartRegistration(form);
+            return await registrationService.StartRegistration(form);
         }
     }
 }

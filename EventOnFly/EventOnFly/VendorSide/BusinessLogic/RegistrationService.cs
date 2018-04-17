@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EventOnFly.Data.DbAccess;
+using EventOnFly.Data.DbAccess.Parameters;
 using EventOnFly.Enums;
 using EventOnFly.VendorSide.Dtos;
 
@@ -14,16 +15,13 @@ namespace EventOnFly.VendorSide.BusinessLogic
     {
         private readonly IProcedureExecutor procedureExecutor;
         private readonly ITransacrionManager transactionManager;
-        private readonly IDbMediator dbMediator;
 
         public RegistrationService(
             IProcedureExecutor procedureExecutor, 
-            ITransacrionManager transactionManager,
-            IDbMediator dbMediator)
+            ITransacrionManager transactionManager)
         {
             this.procedureExecutor = procedureExecutor;
             this.transactionManager = transactionManager;
-            this.dbMediator = dbMediator;
         }
 
         public async Task<StartRegistrationResult> StartRegistration(StartRegistrationForm form)
@@ -32,12 +30,12 @@ namespace EventOnFly.VendorSide.BusinessLogic
             {
                 var serviceExists =
                     await procedureExecutor.ExecProcedureNonQuery<bool>(
-                        ProcedureName.CheckServiceUserExists, 
+                        ProcedureName.UspCheckServiceUserExists, 
                         new ProcedureParameter("username", form.Username), 
                         new ProcedureParameter("email", form.Email));
                 if (serviceExists) return StartRegistrationResult.UserAlreadyExists;
                 await procedureExecutor.ExecuteProcedureNoResult(
-                    ProcedureName.CreateNewService,
+                    ProcedureName.UspCreateNewService,
                     new ProcedureParameter("username", form.Username),
                     new ProcedureParameter("email", form.Email),
                     new ProcedureParameter("password", form.Password),

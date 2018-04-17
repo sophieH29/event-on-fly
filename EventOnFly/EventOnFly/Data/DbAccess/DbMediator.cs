@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading.Tasks;
+using EventOnFly.Data.DbAccess.Parameters;
 using Microsoft.Extensions.Configuration;
 
 namespace EventOnFly.Data.DbAccess
 {
     public interface IDbMediator
     {
-        Task<CommandResponse> ExecuteProcedure(ProcedureName procedureName, params ProcedureParameter[] parameters);
+        Task<CommandResponse> ExecuteProcedure(ProcedureName procedureName, params DataBaseParameter[] parameters);
 
-        Task<int> ExecuteProcedureNonQuery(ProcedureName procedureName, params ProcedureParameter[] parameters);
+        Task<int> ExecuteProcedureNonQuery(ProcedureName procedureName, params DataBaseParameter[] parameters);
     }
 
     public class DbMediator: IDbMediator
@@ -31,19 +30,14 @@ namespace EventOnFly.Data.DbAccess
             return conn;
         }
 
-        private string GetProcedureName(ProcedureName procedureName)
-        {
-            return $"usp{procedureName}";
-        }
-
-        public async Task<CommandResponse> ExecuteProcedure(ProcedureName procedureName, params ProcedureParameter[] parameters)
+        public async Task<CommandResponse> ExecuteProcedure(ProcedureName procedureName, params DataBaseParameter[] parameters)
         {
             using (var conn = await OpenDbConnection())
             {
                 var command = conn.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = GetProcedureName(procedureName);
-                await AddParamsToCommand(command, procedureName, parameters);
+                command.CommandText = procedureName.GetStringName();
+                AddParamsToCommand(command, parameters);
                 var reader = await command.ExecuteReaderAsync();
                 var resp = new CommandResponse();
                 for (int i = 0; i < reader.FieldCount; i++)
@@ -60,32 +54,23 @@ namespace EventOnFly.Data.DbAccess
             }
         }
 
-        public async Task<int> ExecuteProcedureNonQuery(ProcedureName procedureName, params ProcedureParameter[] parameters)
+        public async Task<int> ExecuteProcedureNonQuery(ProcedureName procedureName, params DataBaseParameter[] parameters)
         {
             using (var conn = await OpenDbConnection())
             {
                 var command = conn.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = GetProcedureName(procedureName);
-                await AddParamsToCommand(command, procedureName, parameters);
+                command.CommandText = procedureName.GetStringName();
+                AddParamsToCommand(command, parameters);
                 return await command.ExecuteNonQueryAsync();
             }            
         }
 
-        private async Task AddParamsToCommand(
-            SqlCommand command, ProcedureName procedureName, params ProcedureParameter[] parameters)
+        private void AddParamsToCommand(SqlCommand command, params DataBaseParameter[] parameters)
         {
-            //TO DO: move to procedure
-            var procName = GetProcedureName(procedureName);
-            var script = $"select PARAMETER_NAME, DATA_TYPE from information_schema.parameters where specific_name = '{procName}'";
-            var getParamsCommand = new SqlCommand(script, command.Connection);
-            var dbParams = await getParamsCommand.ExecuteReaderAsync();
-            var paramsDict = parameters.ToDictionary(p => p.ParameterName, p => p.Object);
-            while(dbParams.Read())
+            foreach (var param in parameters)
             {
-                var paramName = dbParams[0].ToString();
-                var paramType = (SqlDbType)Enum.Parse(typeof(SqlDbType), dbParams[1].ToString());
-                command.Parameters.Add(paramName, paramType).Value = paramsDict[paramName];        
+                command.Parameters.Add(param.ParameterName, param.DbType).Value = param.Object;
             }
         }
     }
