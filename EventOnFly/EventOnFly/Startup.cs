@@ -32,7 +32,7 @@ namespace EventOnFly
             services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IProcedureExecutor, ProcedureExecutor>();
             services.AddTransient<IDbMediator, DbMediator>();
-            services.AddTransient<IDbRequestExecutor, DbRequestExecutor>();
+            services.AddTransient<IDbRequestWrapper, DbRequestWrapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

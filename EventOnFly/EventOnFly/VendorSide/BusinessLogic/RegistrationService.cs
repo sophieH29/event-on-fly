@@ -14,19 +14,19 @@ namespace EventOnFly.VendorSide.BusinessLogic
     public class RegistrationService : IRegistrationService
     {
         private readonly IProcedureExecutor procedureExecutor;
-        private readonly IDbRequestExecutor dbRequestExecutor;
+        private readonly IDbRequestWrapper dbRequestWrapper;
 
         public RegistrationService(
             IProcedureExecutor procedureExecutor,
-            IDbRequestExecutor dbRequestExecutor)
+            IDbRequestWrapper dbRequestWrapper)
         {
             this.procedureExecutor = procedureExecutor;
-            this.dbRequestExecutor = dbRequestExecutor;
+            this.dbRequestWrapper = dbRequestWrapper;
         }
 
         public async Task<StartRegistrationResult> StartRegistration(StartRegistrationForm form)
         {
-            return await dbRequestExecutor.ExecuteDbRequestWithResult(async token =>
+            return await dbRequestWrapper.ExecuteDbRequestWithResult(async token =>
             {
                 var serviceExists =
                     await procedureExecutor.ExecProcedureNonQuery<bool>(

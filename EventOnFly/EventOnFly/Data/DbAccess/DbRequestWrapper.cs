@@ -5,18 +5,18 @@ using Microsoft.Extensions.Configuration;
 
 namespace EventOnFly.Data.DbAccess
 {
-    public interface IDbRequestExecutor
+    public interface IDbRequestWrapper
     {
         void ExecuteDbRequest(Func<DbRequestToken, Task> action);
 
         Task<T> ExecuteDbRequestWithResult<T>(Func<DbRequestToken,Task<T>> action);
     }
 
-    public class DbRequestExecutor : IDbRequestExecutor
+    public class DbRequestWrapper : IDbRequestWrapper
     {
         private readonly string connectionString;
 
-        public DbRequestExecutor(IConfiguration configuration)
+        public DbRequestWrapper(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("MyDbConnection");
         }
