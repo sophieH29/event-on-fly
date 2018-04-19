@@ -9,11 +9,11 @@ namespace EventOnFly.Data.DbAccess
 {
     public interface IProcedureExecutor
     {
-        Task<IEnumerable<T>> ExecProcedure<T>(ProcedureName procedureName, params ProcedureParameter[] parameters) where T : new();
+        Task<IEnumerable<T>> ExecProcedure<T>(ProcedureName procedureName, DbRequestToken token, params ProcedureParameter[] parameters) where T : new();
 
-        Task<T> ExecProcedureNonQuery<T>(ProcedureName procedureName, params ProcedureParameter[] parameters) where T : struct;
+        Task<T> ExecProcedureNonQuery<T>(ProcedureName procedureName, DbRequestToken token, params ProcedureParameter[] parameters) where T : struct;
 
-        Task ExecuteProcedureNoResult(ProcedureName procedureName, params ProcedureParameter[] parameters);
+        Task ExecuteProcedureNoResult(ProcedureName procedureName, DbRequestToken token, params ProcedureParameter[] parameters);
     }
 
     public class ProcedureExecutor : IProcedureExecutor
@@ -25,43 +25,43 @@ namespace EventOnFly.Data.DbAccess
             this.dbMediator = dbMediator;
         }
 
-        public async Task<IEnumerable<T>> ExecProcedure<T>(ProcedureName procedureName, params ProcedureParameter[] parameters) where T : new()
+        public async Task<IEnumerable<T>> ExecProcedure<T>(ProcedureName procedureName, DbRequestToken token, params ProcedureParameter[] parameters) where T : new()
         {
-            var dbParams = await GetDbParameters(procedureName, parameters);
-            var result = await dbMediator.ExecuteProcedure(procedureName, dbParams);
+            var dbParams = await GetDbParameters(procedureName, token, parameters);
+            var result = await dbMediator.ExecuteProcedure(procedureName, token, dbParams);
             return result.MapToType<T>();
         }
 
-        public async Task<T> ExecProcedureNonQuery<T>(ProcedureName procedureName, params ProcedureParameter[] parameters) where T : struct
+        public async Task<T> ExecProcedureNonQuery<T>(ProcedureName procedureName, DbRequestToken token, params ProcedureParameter[] parameters) where T : struct
         {
-            var dbParams = await GetDbParameters(procedureName, parameters);
-            var result = await dbMediator.ExecuteProcedureNonQuery(procedureName, dbParams);
+            var dbParams = await GetDbParameters(procedureName, token, parameters);
+            var result = await dbMediator.ExecuteProcedureNonQuery(procedureName, token, dbParams);
             return (T)Convert.ChangeType(result, typeof(T));
         }
 
-        public async Task ExecuteProcedureNoResult(ProcedureName procedureName, params ProcedureParameter[] parameters)
+        public async Task ExecuteProcedureNoResult(ProcedureName procedureName, DbRequestToken token, params ProcedureParameter[] parameters)
         {
-            var dbParams = await GetDbParameters(procedureName, parameters);
-            await dbMediator.ExecuteProcedureNonQuery(procedureName, dbParams);
+            var dbParams = await GetDbParameters(procedureName, token, parameters);
+            await dbMediator.ExecuteProcedureNonQuery(procedureName, token, dbParams);
         }
 
-        private async Task<DataBaseParameter[]> GetDbParameters(ProcedureName procedureName, params ProcedureParameter[] parameters)
+        private async Task<DataBaseParameter[]> GetDbParameters(ProcedureName procedureName, DbRequestToken token, params ProcedureParameter[] parameters)
         {
             var result = new DataBaseParameter[parameters.Length];
             for(var i = 0; i < parameters.Length; ++i)
             {
-                result[i] = await GetDbParameter(procedureName, parameters[i]);
+                result[i] = await GetDbParameter(procedureName, token, parameters[i]);
             }
             return result;
         }
 
-        private async Task<DataBaseParameter> GetDbParameter(ProcedureName procedureName, ProcedureParameter parameter)
+        private async Task<DataBaseParameter> GetDbParameter(ProcedureName procedureName, DbRequestToken token, ProcedureParameter parameter)
         {
             var dbParam = new DataBaseParameter(parameter);
             if (parameter.DbType.HasValue)
                 return dbParam;
             var procNameParam = new ProcedureParameter("procedureName", procedureName.GetStringName()) { DbType = SqlDbType.NVarChar };
-            var res = (await ExecProcedure<ProcedureParameterDescription>(ProcedureName.UspInternalGetProcedureParameters, procNameParam)).Single();
+            var res = (await ExecProcedure<ProcedureParameterDescription>(ProcedureName.UspInternalGetProcedureParameters, token, procNameParam)).Single();
             dbParam.DbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), res.ToString());
             return dbParam;
         }
