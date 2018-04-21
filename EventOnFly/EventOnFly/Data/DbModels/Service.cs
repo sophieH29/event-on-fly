@@ -15,5 +15,7 @@ namespace EventOnFly.Data.DbModels
         public ServiceState State { get; set; }
 
         public ServiceType ServiceType { get; set; }
+
+        public int UserId { get; set; }
     }
 }

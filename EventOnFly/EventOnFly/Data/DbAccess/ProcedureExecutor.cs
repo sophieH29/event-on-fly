@@ -61,7 +61,7 @@ namespace EventOnFly.Data.DbAccess
             if (parameter.DbType.HasValue)
                 return dbParam;
             var procNameParam = new ProcedureParameter("procedureName", procedureName.GetStringName()) { DbType = SqlDbType.NVarChar };
-            var res = (await ExecProcedure<ProcedureParameterDescription>(ProcedureName.UspInternalGetProcedureParameters, token, procNameParam)).Single();
+            var res = (await ExecProcedure<ProcedureParameterDescription>(ProcedureName.spInternalGetProcedureParameters, token, procNameParam)).Single();
             dbParam.DbType = (SqlDbType)Enum.Parse(typeof(SqlDbType), res.ToString());
             return dbParam;
         }
