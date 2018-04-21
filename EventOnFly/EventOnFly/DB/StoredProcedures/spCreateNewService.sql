@@ -1,5 +1,5 @@
-IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'Service_Create')
-DROP PROCEDURE [dbo].[Service_Create]
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'spCreateNewService')
+DROP PROCEDURE [dbo].[spCreateNewService]
 GO
 
 SET ANSI_NULLS ON
@@ -11,11 +11,12 @@ GO
 -- Create Date: 04/21/2018
 -- Description: Create Service
 -- =============================================
-CREATE PROCEDURE [dbo].[Service_Create]
+CREATE PROCEDURE [dbo].spCreateNewService
 (
 	@Name nvarchar(max),
 	@ServiceType int,
-	@State int = 2 -- InRegistrationProcess
+	@State int = 2, -- InRegistrationProcess
+	@UserId int
 )
 AS
 BEGIN
@@ -25,12 +26,14 @@ BEGIN
    INSERT INTO [dbo].[Service]
            ([Name]
            ,[ServiceType]
-           ,[State])
+           ,[State]
+		   ,[UserId])
 
      VALUES
            (@Name,
             @ServiceType,
-			@State)
+			@State,
+			@UserId)
 
 END
 GO

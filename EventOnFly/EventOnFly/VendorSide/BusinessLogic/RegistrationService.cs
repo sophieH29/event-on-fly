@@ -30,13 +30,13 @@ namespace EventOnFly.VendorSide.BusinessLogic
             {
                 var serviceExists =
                     await procedureExecutor.ExecProcedureNonQuery<bool>(
-                        ProcedureName.UspCheckServiceUserExists,
+                        ProcedureName.spCheckServiceUserExists,
                         token,
                         new ProcedureParameter("username", form.Username), 
                         new ProcedureParameter("email", form.Email));
                 if (serviceExists) return StartRegistrationResult.UserAlreadyExists;
                 await procedureExecutor.ExecuteProcedureNoResult(
-                    ProcedureName.UspCreateNewService,
+                    ProcedureName.spCreateNewService,
                     token,
                     new ProcedureParameter("username", form.Username),
                     new ProcedureParameter("email", form.Email),

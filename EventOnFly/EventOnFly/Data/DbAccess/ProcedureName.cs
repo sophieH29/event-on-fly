@@ -2,9 +2,8 @@
 {
     public enum ProcedureName
     {
-        UspCheckServiceUserExists = 0,
-        UspCreateNewService = 1,
-
-        UspInternalGetProcedureParameters = 1000
+        spCheckServiceUserExists = 0,
+        spCreateNewService = 1,
+        spInternalGetProcedureParameters = 1000
     }
 }
