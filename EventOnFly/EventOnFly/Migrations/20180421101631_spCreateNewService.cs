@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EventOnFly.Migrations
 {
@@ -53,7 +51,7 @@ namespace EventOnFly.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.Sql("DROP PROCEDURE IF EXISTS [dbo].[spCreateNewService]");
         }
     }
 }
