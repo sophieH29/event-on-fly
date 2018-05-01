@@ -1,4 +1,4 @@
-using EventOnFly.Data;
+using EventOnFly.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventOnFly.Controllers

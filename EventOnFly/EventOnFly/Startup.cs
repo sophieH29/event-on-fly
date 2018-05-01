@@ -1,6 +1,6 @@
-using EventOnFly.Data;
-using EventOnFly.Data.DbAccess;
-using EventOnFly.VendorSide.BusinessLogic;
+using EventOnFly.DataAccess.Data;
+using EventOnFly.DataAccess.Data.DbAccess;
+using EventOnFly.Modules.VendorModule.BusinessLogic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;

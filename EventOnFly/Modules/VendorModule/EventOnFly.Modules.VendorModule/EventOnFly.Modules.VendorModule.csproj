@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\EventOnFly.Common.Interfaces\EventOnFly.Common.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\DataAccess\EventOnFly.DataAccess.Data\EventOnFly.DataAccess.Data.csproj" />
+  </ItemGroup>
+
+</Project>
