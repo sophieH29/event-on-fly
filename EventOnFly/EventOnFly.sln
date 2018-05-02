@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventOrganizerModule", "Eve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOnFly.Modules.EventOrganizer", "EventOnFly.Modules.EventOrganizer\EventOnFly.Modules.EventOrganizer.csproj", "{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "EventOnFly.DataAccess.Db", "EventOnFly.DataAccess.Db\EventOnFly.DataAccess.Db.sqlproj", "{4DB9723B-A405-49BC-BFAB-232D22194D90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,12 @@ Global
 		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DB9723B-A405-49BC-BFAB-232D22194D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DB9723B-A405-49BC-BFAB-232D22194D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DB9723B-A405-49BC-BFAB-232D22194D90}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4DB9723B-A405-49BC-BFAB-232D22194D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DB9723B-A405-49BC-BFAB-232D22194D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DB9723B-A405-49BC-BFAB-232D22194D90}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +68,7 @@ Global
 		{01F91D9E-8715-4774-B20E-05673DDAE55A} = {1FBD7DFD-C48B-474F-A87D-006B25F52AB9}
 		{9919D047-59C8-4963-BE4C-0A1E1DA6EA18} = {BF1A6782-6E2F-4880-B73C-B13DD5F7FA0C}
 		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A} = {9919D047-59C8-4963-BE4C-0A1E1DA6EA18}
+		{4DB9723B-A405-49BC-BFAB-232D22194D90} = {1FBD7DFD-C48B-474F-A87D-006B25F52AB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {432B65C5-B7A1-4C83-8A9F-A38312A62AA8}
