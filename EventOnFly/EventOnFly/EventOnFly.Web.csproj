@@ -39,6 +39,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\EventOnFly.Common.Interfaces\EventOnFly.Common.Interfaces.csproj" />
     <ProjectReference Include="..\DataAccess\EventOnFly.DataAccess.Data\EventOnFly.DataAccess.Data.csproj" />
+    <ProjectReference Include="..\EventOnFly.Modules.EventOrganizer\EventOnFly.Modules.EventOrganizer.csproj" />
     <ProjectReference Include="..\Modules\VendorModule\EventOnFly.Modules.VendorModule\EventOnFly.Modules.VendorModule.csproj" />
   </ItemGroup>
 

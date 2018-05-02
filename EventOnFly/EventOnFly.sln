@@ -9,15 +9,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{BF1A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VendorModule", "VendorModule", "{C04D623F-B397-48D5-9382-F898E118CC8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOnFly.Modules.VendorModule", "Modules\VendorModule\EventOnFly.Modules.VendorModule\EventOnFly.Modules.VendorModule.csproj", "{22CD6BA4-D459-4C9A-90FF-F37D557FB270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventOnFly.Modules.VendorModule", "Modules\VendorModule\EventOnFly.Modules.VendorModule\EventOnFly.Modules.VendorModule.csproj", "{22CD6BA4-D459-4C9A-90FF-F37D557FB270}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{0374A226-F97F-4E27-B0B0-D0699AFC02A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOnFly.Common.Interfaces", "Common\EventOnFly.Common.Interfaces\EventOnFly.Common.Interfaces.csproj", "{7FB01162-38F8-4322-ABFF-ADFC8641CB47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventOnFly.Common.Interfaces", "Common\EventOnFly.Common.Interfaces\EventOnFly.Common.Interfaces.csproj", "{7FB01162-38F8-4322-ABFF-ADFC8641CB47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{1FBD7DFD-C48B-474F-A87D-006B25F52AB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOnFly.DataAccess.Data", "DataAccess\EventOnFly.DataAccess.Data\EventOnFly.DataAccess.Data.csproj", "{01F91D9E-8715-4774-B20E-05673DDAE55A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventOnFly.DataAccess.Data", "DataAccess\EventOnFly.DataAccess.Data\EventOnFly.DataAccess.Data.csproj", "{01F91D9E-8715-4774-B20E-05673DDAE55A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventOrganizerModule", "EventOrganizerModule", "{9919D047-59C8-4963-BE4C-0A1E1DA6EA18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOnFly.Modules.EventOrganizer", "EventOnFly.Modules.EventOrganizer\EventOnFly.Modules.EventOrganizer.csproj", "{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{01F91D9E-8715-4774-B20E-05673DDAE55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01F91D9E-8715-4774-B20E-05673DDAE55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01F91D9E-8715-4774-B20E-05673DDAE55A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,8 @@ Global
 		{22CD6BA4-D459-4C9A-90FF-F37D557FB270} = {C04D623F-B397-48D5-9382-F898E118CC8C}
 		{7FB01162-38F8-4322-ABFF-ADFC8641CB47} = {0374A226-F97F-4E27-B0B0-D0699AFC02A2}
 		{01F91D9E-8715-4774-B20E-05673DDAE55A} = {1FBD7DFD-C48B-474F-A87D-006B25F52AB9}
+		{9919D047-59C8-4963-BE4C-0A1E1DA6EA18} = {BF1A6782-6E2F-4880-B73C-B13DD5F7FA0C}
+		{542C0DEF-36E5-4351-A02A-6D86AA1DC86A} = {9919D047-59C8-4963-BE4C-0A1E1DA6EA18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {432B65C5-B7A1-4C83-8A9F-A38312A62AA8}

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventOnFly.Common.Interfaces.Enums
+﻿namespace EventOnFly.Common.Interfaces.Enums
 {
     public enum ServiceState
     {

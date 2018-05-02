@@ -2,9 +2,6 @@
 using EventOnFly.DataAccess.Data.DbAccess;
 using EventOnFly.DataAccess.Data.DbAccess.Parameters;
 using EventOnFly.Modules.VendorModule.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EventOnFly.Modules.VendorModule.BusinessLogic
