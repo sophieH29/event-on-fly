@@ -1,4 +1,4 @@
-﻿namespace EventOnFly.DataAccess.Data.DbAccess.Parameters
+﻿namespace EventOnFly.DataAccess.Data.Parameters
 {
     public class ProcedureParameterDescription
     {

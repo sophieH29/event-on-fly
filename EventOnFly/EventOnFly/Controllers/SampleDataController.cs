@@ -6,13 +6,6 @@ namespace EventOnFly.Controllers
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private readonly EofDbContext context;
-
-        public SampleDataController(EofDbContext context)
-        {
-            this.context = context;
-        }
-
         //[HttpPost("[action]")]
         //public IActionResult PostTest([FromBody]Venue venue)
         //{

@@ -24,11 +24,6 @@ namespace EventOnFly
         {
             services.AddMvc();
 
-            services.AddDbContext<EofDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
-
-            services.BuildServiceProvider().GetService<EofDbContext>().Database.Migrate();
-
             services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IProcedureExecutor, ProcedureExecutor>();
             services.AddTransient<IDbMediator, DbMediator>();

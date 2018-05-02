@@ -1,4 +1,4 @@
-﻿using EventOnFly.DataAccess.Data.DbAccess.Parameters;
+﻿using EventOnFly.DataAccess.Data.Parameters;
 using System;
 using System.Collections.Generic;
 using System.Data;

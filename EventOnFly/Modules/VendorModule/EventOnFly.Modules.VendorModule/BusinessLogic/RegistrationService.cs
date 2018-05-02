@@ -1,6 +1,6 @@
 ﻿using EventOnFly.Common.Interfaces.Enums;
 using EventOnFly.DataAccess.Data.DbAccess;
-using EventOnFly.DataAccess.Data.DbAccess.Parameters;
+using EventOnFly.DataAccess.Data.Parameters;
 using EventOnFly.Modules.VendorModule.Dtos;
 using System.Threading.Tasks;
 

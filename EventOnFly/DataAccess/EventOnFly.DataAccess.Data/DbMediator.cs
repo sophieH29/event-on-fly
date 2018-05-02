@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using EventOnFly.DataAccess.Data.DbAccess.Parameters;
+using EventOnFly.DataAccess.Data.Parameters;
 
 namespace EventOnFly.DataAccess.Data.DbAccess
 {
