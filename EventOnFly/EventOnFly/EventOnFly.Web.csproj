@@ -9,19 +9,22 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+    <PackageReference Include="fluentvalidation.aspnetcore" Version="7.3.3" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
-    <Compile Remove="Models\**" />
+    <Compile Remove="EventOrganizerSide\**" />
     <Content Remove="ClientApp\**" />
-    <Content Remove="Models\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Models\**" />
+    <Content Remove="EventOrganizerSide\**" />
+    <EmbeddedResource Remove="EventOrganizerSide\**" />
+    <None Remove="EventOrganizerSide\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,10 +33,6 @@
     <None Remove="ClientApp\app\vendors\registration\registration.api.service.ts" />
     <None Remove="ClientApp\app\vendors\registration\vendor-registration.component.ts" />
     <None Remove="ClientApp\app\vendors\vendors.module.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EventOrganizerSide\" />
   </ItemGroup>
 
   <ItemGroup>

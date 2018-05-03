@@ -10,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EventOnFly.Migrations
 {
     [DbContext(typeof(EofDbContext))]
-    partial class EofDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180503163905_addUserVendor")]
+    partial class addUserVendor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
