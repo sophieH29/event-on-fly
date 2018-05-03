@@ -1,10 +1,11 @@
 ﻿using EventOnFly.Data.DbModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Linq;
 
 namespace EventOnFly.Data
 {
-    public class EofDbContext : DbContext
+    public class EofDbContext : IdentityDbContext<AppUser>
     {
         public EofDbContext(DbContextOptions<EofDbContext> options)
             : base(options)
@@ -31,7 +32,9 @@ namespace EventOnFly.Data
 
         public DbSet<ServiceTypeRelation> ServiceTypeRelations { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<Vendor> Vendors { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
