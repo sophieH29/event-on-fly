@@ -105,6 +105,7 @@ namespace EventOnFly
       services.AddAuthorization(options =>
       {
         options.AddPolicy("ApiUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.ApiAccess));
+        options.AddPolicy("VendorUser", policy => policy.RequireClaim(Constants.Strings.JwtClaimIdentifiers.Rol, Constants.Strings.JwtClaims.VendorAccess));
       });
 
       // add identity

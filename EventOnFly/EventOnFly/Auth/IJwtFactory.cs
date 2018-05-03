@@ -9,6 +9,6 @@ namespace EventOnFly.Web.Auth
   public interface IJwtFactory
   {
     Task<string> GenerateEncodedToken(string userName, ClaimsIdentity identity);
-    ClaimsIdentity GenerateClaimsIdentity(string userName, string id);
+    ClaimsIdentity GenerateClaimsIdentity(string userName, string id, string accessClaim = Helpers.Constants.Strings.JwtClaims.ApiAccess);
   }
 }

@@ -54,12 +54,12 @@ namespace EventOnFly.Web.Auth
     /// </summary>
     /// <param name="userName">UserName</param>
     /// <param name="identity">Identity</param>
-    public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
+    public ClaimsIdentity GenerateClaimsIdentity(string userName, string id, string accessClaim = Helpers.Constants.Strings.JwtClaims.ApiAccess)
     {
       return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
       {
                 new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Id, id),
-                new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Rol, Helpers.Constants.Strings.JwtClaims.ApiAccess)
+                new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Rol, accessClaim)
             });
     }
 
