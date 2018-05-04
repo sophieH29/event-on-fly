@@ -3,7 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppModuleShared } from "./app.shared.module";
 import { AppComponent } from "./app.component";
 import { BASE_URL } from "./common/injectableVariables";
-
 @NgModule({
     bootstrap: [ AppComponent ],
     imports: [

@@ -7,14 +7,14 @@ import { ConfigService } from '../utils/config.service';
 import {BaseService} from "./base.service";
 
 import { Observable } from 'rxjs/Rx';
-import { BehaviorSubject } from 'rxjs/Rx'; 
+import { BehaviorSubject } from 'rxjs/Rx';
 
 // Add the RxJS Observable operators we need in this app.
 import '../../rxjs-operators';
 
 @Injectable()
 
-export class UserService extends BaseService {
+export class UserService extends BaseService {   
 
   baseUrl: string = '';
 
@@ -25,16 +25,16 @@ export class UserService extends BaseService {
 
   private loggedIn = false;
 
-  constructor(private http: Http, private configService: ConfigService) {
+    constructor(private http: Http, private configService: ConfigService) {
     super();
-    this.loggedIn = !!localStorage.getItem('auth_token');
+        this.loggedIn = !!this.getAuthToken();
     // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
     // header component resulting in authed user nav links disappearing despite the fact user is still logged in
     this._authNavStatusSource.next(this.loggedIn);
     this.baseUrl = configService.getApiURI();
   }
 
-    register(email: string, password: string, firstName: string, lastName: string,location: string): Observable<UserRegistration> {
+    register(email: string, password: string, firstName: string, lastName: string): Observable<UserRegistration> {
     let body = JSON.stringify({ email, password, firstName, lastName,location });
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -55,7 +55,7 @@ export class UserService extends BaseService {
       )
       .map(res => res.json())
       .map(res => {
-        localStorage.setItem('auth_token', res.auth_token);
+          this.setAuthToken(res.auth_token);
         this.loggedIn = true;
         this._authNavStatusSource.next(true);
         return true;
@@ -64,7 +64,7 @@ export class UserService extends BaseService {
   }
 
   logout() {
-    localStorage.removeItem('auth_token');
+      this.removeAuthToken();
     this.loggedIn = false;
     this._authNavStatusSource.next(false);
   }
@@ -82,12 +82,31 @@ export class UserService extends BaseService {
       this.baseUrl + '/externalauth/facebook', body, { headers })
       .map(res => res.json())
       .map(res => {
-        localStorage.setItem('auth_token', res.auth_token);
+          this.setAuthToken(res.auth_token);
         this.loggedIn = true;
         this._authNavStatusSource.next(true);
         return true;
       })
       .catch(this.handleError);
-  }
+    }
+
+    getAuthToken() {
+        if (typeof window !== 'undefined') {
+            return window.localStorage.getItem('auth_token');
+        }
+        return null;
+    }
+
+    setAuthToken(token: string) {
+        if (typeof window !== 'undefined') {
+            window.localStorage.setItem('auth_token', token);
+        }
+    }
+
+    removeAuthToken() {
+        if (typeof window !== 'undefined') {
+            window.localStorage.removeItem('auth_token');
+        }
+    }
 }
 

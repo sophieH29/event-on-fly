@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Compile Remove="EventOrganizerSide\**" />
     <Content Remove="ClientApp\**" />
     <Content Remove="EventOrganizerSide\**" />
@@ -29,12 +28,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\common\local-storage.ts" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
     <None Remove="ClientApp\app\common\injectableVariables.ts" />
     <None Remove="ClientApp\app\home\home.component.ts" />
     <None Remove="ClientApp\app\vendors\registration\registration.api.service.ts" />
     <None Remove="ClientApp\app\vendors\registration\vendor-registration.component.ts" />
     <None Remove="ClientApp\app\vendors\vendors.module.ts" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <ProjectReference Include="..\Common\EventOnFly.Common.Interfaces\EventOnFly.Common.Interfaces.csproj" />
@@ -42,16 +45,21 @@
     <ProjectReference Include="..\Modules\VendorModule\EventOnFly.Modules.VendorModule\EventOnFly.Modules.VendorModule.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\common\injectableVariables.ts" />
     <TypeScriptCompile Include="ClientApp\app\home\home.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\vendors\registration\registration.api.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\vendors\registration\vendor-registration.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\vendors\vendors.module.ts" />
+  </ItemGroup>-->
+
+  <ItemGroup>
+    <Folder Include="ClientApp\app\vendors\" />
+    <Folder Include="ClientApp\dist\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\dist\" />
+    <TypeScriptCompile Include="ClientApp\app\common\local-storage.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
