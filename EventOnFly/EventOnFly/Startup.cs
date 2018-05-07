@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace EventOnFly
 {
@@ -42,7 +43,10 @@ namespace EventOnFly
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc();
+      services.AddMvc(options =>
+      {
+        options.Filters.Add(new Microsoft.AspNetCore.Mvc.RequireHttpsAttribute());
+      });
 
       services.AddDbContext<EofDbContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
@@ -163,6 +167,9 @@ namespace EventOnFly
       app.UseDefaultFiles();
       app.UseStaticFiles();
 
+      var options = new RewriteOptions().AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 44355);
+      app.UseRewriter(options);
+
       app.UseMvc(routes =>
             {
               routes.MapRoute(
@@ -173,6 +180,8 @@ namespace EventOnFly
                           name: "spa-fallback",
                           defaults: new { controller = "Home", action = "Index" });
             });
+
+      
     }
   }
 }

@@ -18,7 +18,7 @@ export class FacebookLoginComponent {
   isRequesting: boolean; 
 
   launchFbLogin() {
-      this.authWindow = window.open('https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&client_id=1528751870549294&display=popup&redirect_uri=http://localhost:5000/facebook-auth.html&scope=email',null,'width=600,height=400');    
+      this.authWindow = window.open('https://www.facebook.com/v2.11/dialog/oauth?&response_type=token&display=popup&client_id=214154915845337&display=popup&redirect_uri=https://localhost:44355/facebook-auth.html&scope=email', null, 'width=600,height=400');    
   }
 
   constructor(private userService: UserService, private router: Router) {
@@ -31,8 +31,8 @@ export class FacebookLoginComponent {
 
   handleMessage(event: Event) {
     const message = event as MessageEvent;
-    // Only trust messages from the below origin.
-    if (message.origin !== "http://localhost:5000") return;
+    // Only trust messages from the below origin. TODO: change to dynamically get origin
+      if (message.origin !== "https://localhost:44355") return;
 
     this.authWindow.close();
 

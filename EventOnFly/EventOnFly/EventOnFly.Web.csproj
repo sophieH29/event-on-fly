@@ -28,7 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\app\common\local-storage.ts" />
+    <Content Remove="wwwroot\assets\.gitkeep" />
+    <Content Remove="wwwroot\assets\facebook-login.png" />
+    <Content Remove="wwwroot\assets\util.js" />
+    <Content Remove="wwwroot\facebook-auth.html" />
   </ItemGroup>
 
   <!--<ItemGroup>
@@ -59,7 +62,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\common\local-storage.ts" />
+    <None Include="wwwroot\assets\.gitkeep" />
+    <None Include="wwwroot\assets\facebook-login.png" />
+    <None Include="wwwroot\assets\util.js" />
+    <None Include="wwwroot\facebook-auth.html" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
