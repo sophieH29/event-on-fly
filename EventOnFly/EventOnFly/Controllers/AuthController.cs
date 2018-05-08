@@ -10,7 +10,7 @@ using EventOnFly.Web.Auth.Models;
 using EventOnFly.Web.Auth.ViewModels;
 using EventOnFly.Web.Auth.Helpers;
 using EventOnFly.Web.Auth.Models;
-
+using System;
 
 namespace EventOnFly.Web.Controllers
 {
@@ -55,11 +55,13 @@ namespace EventOnFly.Web.Controllers
       // get the user to verifty
       var userToVerify = await _userManager.FindByNameAsync(userName);
 
-      if (userToVerify == null) return await Task.FromResult<ClaimsIdentity>(null);
+      if (userToVerify == null) return await Task.FromResult<ClaimsIdentity>(null);     
 
       // check the credentials
       if (await _userManager.CheckPasswordAsync(userToVerify, password))
       {
+        userToVerify.LastLogin = DateTime.Now;
+        await _userManager.UpdateAsync(userToVerify);
         return await Task.FromResult(_jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id, Constants.Strings.JwtClaims.VendorAccess));
       }
 
