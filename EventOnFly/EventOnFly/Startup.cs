@@ -29,8 +29,8 @@ namespace EventOnFly
 {
   public class Startup
   {
-
-    private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // todo: get this from somewhere secure
+   
+    private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // TODO: generate key and put in secret place, e.g. Azure wallet
     private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
 
     public Startup(IConfiguration configuration)
