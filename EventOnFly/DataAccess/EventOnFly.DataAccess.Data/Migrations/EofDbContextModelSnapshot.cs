@@ -19,7 +19,74 @@ namespace EventOnFly.Migrations
                 .HasAnnotation("ProductVersion", "2.1.0-preview2-30571")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.Booking", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<DateTime>("DateUpdated");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<long?>("FacebookId");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<long?>("GoogleId");
+
+                    b.Property<DateTime>("LastLogin");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("PictureUrl");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AppUser");
+                });
+
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.Booking", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -33,7 +100,7 @@ namespace EventOnFly.Migrations
                     b.ToTable("Booking");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.Property", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.Property", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -53,7 +120,7 @@ namespace EventOnFly.Migrations
                     b.ToTable("Property");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.PropertyValue", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.PropertyValue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -71,7 +138,7 @@ namespace EventOnFly.Migrations
                     b.ToTable("PropertyValue");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.Service", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.Service", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -82,14 +149,18 @@ namespace EventOnFly.Migrations
 
                     b.Property<int>("State");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("VendorId");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("Id", "VendorId");
+
+                    b.HasIndex("VendorId");
 
                     b.ToTable("Service");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceOrder", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceOrder", b =>
                 {
                     b.Property<int>("ServiceId");
 
@@ -102,7 +173,7 @@ namespace EventOnFly.Migrations
                     b.ToTable("ServiceOrder");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceOrderPropertyValue", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceOrderPropertyValue", b =>
                 {
                     b.Property<int>("ServiceId");
 
@@ -123,7 +194,7 @@ namespace EventOnFly.Migrations
                     b.ToTable("ServiceOrderPropertyValue");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServicePropertyValue", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServicePropertyValue", b =>
                 {
                     b.Property<int>("ServiceId");
 
@@ -142,7 +213,7 @@ namespace EventOnFly.Migrations
                     b.ToTable("ServicePropertyValue");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceRelation", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceRelation", b =>
                 {
                     b.Property<int>("Service1Id");
 
@@ -157,7 +228,7 @@ namespace EventOnFly.Migrations
                     b.ToTable("ServiceRelation");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceTypePropertyRel", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceTypePropertyRel", b =>
                 {
                     b.Property<int>("ServiceType");
 
@@ -170,7 +241,7 @@ namespace EventOnFly.Migrations
                     b.ToTable("ServiceTypePropertyRel");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceTypeRelation", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceTypeRelation", b =>
                 {
                     b.Property<int>("ServiceId");
 
@@ -183,86 +254,268 @@ namespace EventOnFly.Migrations
                     b.ToTable("ServiceTypeRelation");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.Property", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.Vendor", b =>
                 {
-                    b.HasOne("EventOnFly.Data.DbModels.PropertyValue", "DefaultVaue")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("IdentityId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityId");
+
+                    b.ToTable("Vendor");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("IdentityRole");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("IdentityRoleClaim");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IdentityUserClaim");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("ProviderKey");
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IdentityUserLogin");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("IdentityUserRole");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("IdentityUserToken");
+                });
+
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.Property", b =>
+                {
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.PropertyValue", "DefaultVaue")
                         .WithMany()
                         .HasForeignKey("DefaultVaueId");
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceOrder", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.Service", b =>
                 {
-                    b.HasOne("EventOnFly.Data.DbModels.Booking", "Booking")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceOrder", b =>
+                {
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Booking", "Booking")
                         .WithMany()
                         .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EventOnFly.Data.DbModels.Service", "Service")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceOrderPropertyValue", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceOrderPropertyValue", b =>
                 {
-                    b.HasOne("EventOnFly.Data.DbModels.Property", "Property")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Property", "Property")
                         .WithMany()
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EventOnFly.Data.DbModels.PropertyValue", "PropertyValue")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.PropertyValue", "PropertyValue")
                         .WithMany()
                         .HasForeignKey("PropertyValueId");
 
-                    b.HasOne("EventOnFly.Data.DbModels.ServiceOrder", "ServiceOrder")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.ServiceOrder", "ServiceOrder")
                         .WithMany()
                         .HasForeignKey("ServiceId", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServicePropertyValue", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServicePropertyValue", b =>
                 {
-                    b.HasOne("EventOnFly.Data.DbModels.Property", "Property")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Property", "Property")
                         .WithMany()
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EventOnFly.Data.DbModels.PropertyValue", "PropertyValue")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.PropertyValue", "PropertyValue")
                         .WithMany()
                         .HasForeignKey("PropertyValueId");
 
-                    b.HasOne("EventOnFly.Data.DbModels.Service", "Service")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceRelation", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceRelation", b =>
                 {
-                    b.HasOne("EventOnFly.Data.DbModels.Service", "Service1")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Service", "Service1")
                         .WithMany()
                         .HasForeignKey("Service1Id")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EventOnFly.Data.DbModels.Service", "Service2")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Service", "Service2")
                         .WithMany()
                         .HasForeignKey("Service2Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceTypePropertyRel", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceTypePropertyRel", b =>
                 {
-                    b.HasOne("EventOnFly.Data.DbModels.Property", "Property")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Property", "Property")
                         .WithMany()
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EventOnFly.Data.DbModels.ServiceTypeRelation", b =>
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.ServiceTypeRelation", b =>
                 {
-                    b.HasOne("EventOnFly.Data.DbModels.Service", "Service")
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("EventOnFly.DataAccess.Data.DbModels.Vendor", b =>
+                {
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.AppUser", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.AppUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.AppUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.AppUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("EventOnFly.DataAccess.Data.DbModels.AppUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -15,7 +15,10 @@ namespace EventOnFly.DataAccess.Data.DbModels
         public ServiceState State { get; set; }
 
         public ServiceType ServiceType { get; set; }
+        
+        public Vendor Vendor { get; set; }
 
-        public int UserId { get; set; }
+        [Key]
+        public int VendorId { get; set; }
     }
 }

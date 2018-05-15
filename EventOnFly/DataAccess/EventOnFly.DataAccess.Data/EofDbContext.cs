@@ -1,11 +1,12 @@
 ﻿using EventOnFly.DataAccess.Data.DbModels;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace EventOnFly.DataAccess.Data
 {
-    public class EofDbContext : DbContext
-    {
+    public class EofDbContext : IdentityDbContext<AppUser>
+  {
         public EofDbContext(DbContextOptions<EofDbContext> options)
             : base(options)
         {
@@ -31,13 +32,15 @@ namespace EventOnFly.DataAccess.Data
 
         public DbSet<ServiceTypeRelation> ServiceTypeRelations { get; set; }
 
+        public DbSet<Vendor> Vendors { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
-                entity.Relational().TableName = entity.Name.Split('.').Last();
+                entity.Relational().TableName = entity.Name.Split('.').Last().Split('<').First();
             }
 
             modelBuilder.Entity<ServiceOrder>()
@@ -99,6 +102,12 @@ namespace EventOnFly.DataAccess.Data
                 .WithMany()
                 .HasForeignKey(p => p.ServiceId);
             modelBuilder.Entity<ServiceTypeRelation>().HasKey(p => new { p.ServiceId, p.ServiceType });
+
+            modelBuilder.Entity<Service>()
+                      .HasOne(p => p.Vendor)
+                      .WithMany()
+                      .HasForeignKey(p => p.VendorId);
+            modelBuilder.Entity<Service>().HasKey(p => new { p.Id });
         }
     }
 }

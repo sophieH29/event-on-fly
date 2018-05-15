@@ -9,32 +9,38 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+    <PackageReference Include="fluentvalidation.aspnetcore" Version="7.3.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
-    <Compile Remove="Models\**" />
+    <Compile Remove="EventOrganizerSide\**" />
     <Content Remove="ClientApp\**" />
-    <Content Remove="Models\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Models\**" />
+    <Content Remove="EventOrganizerSide\**" />
+    <EmbeddedResource Remove="EventOrganizerSide\**" />
+    <None Remove="EventOrganizerSide\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\assets\.gitkeep" />
+    <Content Remove="wwwroot\assets\facebook-login.png" />
+    <Content Remove="wwwroot\assets\util.js" />
+    <Content Remove="wwwroot\facebook-auth.html" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
     <None Remove="ClientApp\app\common\injectableVariables.ts" />
     <None Remove="ClientApp\app\home\home.component.ts" />
     <None Remove="ClientApp\app\vendors\registration\registration.api.service.ts" />
     <None Remove="ClientApp\app\vendors\registration\vendor-registration.component.ts" />
     <None Remove="ClientApp\app\vendors\vendors.module.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EventOrganizerSide\" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <ProjectReference Include="..\Common\EventOnFly.Common.Interfaces\EventOnFly.Common.Interfaces.csproj" />
@@ -43,12 +49,24 @@
     <ProjectReference Include="..\Modules\VendorModule\EventOnFly.Modules.VendorModule\EventOnFly.Modules.VendorModule.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\common\injectableVariables.ts" />
     <TypeScriptCompile Include="ClientApp\app\home\home.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\vendors\registration\registration.api.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\vendors\registration\vendor-registration.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\vendors\vendors.module.ts" />
+  </ItemGroup>-->
+
+  <ItemGroup>
+    <Folder Include="ClientApp\app\vendors\" />
+    <Folder Include="ClientApp\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\.gitkeep" />
+    <None Include="wwwroot\assets\facebook-login.png" />
+    <None Include="wwwroot\assets\util.js" />
+    <None Include="wwwroot\facebook-auth.html" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
@@ -80,5 +98,4 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
-
 </Project>
